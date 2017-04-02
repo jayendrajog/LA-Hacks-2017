@@ -1,13 +1,42 @@
+var idArr = [
+  "Nina",
+  "Jay",
+  "Sam",
+  "James"
+];
+
 var timeCount = 1;
 
 var historyData = [
   {
     time: 0,
-    attention: 1
+    attention: 0
   }
 ];
 
 var studentsArr = [];
+var idInfoArr = [
+  {
+    name: "Nina Ling",
+    attention: 0,
+    history: [0]
+  },
+  {
+    name: "Jayendra Jog",
+    attention: 0,
+    history: [0]
+  },
+  {
+    name: "Samuel Gessow",
+    attention: 0,
+    history: [0]
+  },
+  {
+    name: "James Vaughan",
+    attention: 0,
+    history: [0]
+  }
+];
 
 // var studentsArr = [
 //   {

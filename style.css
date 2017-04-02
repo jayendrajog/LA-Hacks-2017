@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Hug Me Tight";
+  src: url("assets/hug-me-tight.ttf");
+}
+
 body {
   margin: 0px;
   padding: 0px;
@@ -28,6 +33,13 @@ body {
 	justify-content: center;
 	align-items: center;
   position: relative;
+}
+
+#logo {
+  font-family: "Hug Me Tight";
+  font-size: 35px;
+  position: absolute;
+  margin-top: 2px;
 }
 
 #content {

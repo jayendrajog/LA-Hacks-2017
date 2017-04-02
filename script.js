@@ -25,8 +25,14 @@ var FaceRectangles = React.createClass({
         "Access-Control-Allow-Headers": "Authorization"
       },
       success: function(faceData) {
-        this.setState({data: faceData});
-        console.log(this.state.data);
+        if (faceData.length > 0) {
+          this.setState({data: faceData});
+          studentsArr = faceData;
+          console.log(studentsArr);
+        }
+        else {
+          studentsArr = [];
+        }
       }.bind(this),
       error: function(xhr, status, err) {
         console.error("ajax error");
@@ -40,15 +46,21 @@ var FaceRectangles = React.createClass({
     studentsArr.map(function(student){
       var faceStyle = {
         position: "absolute",
-        border: "3px solid " + (student.attention == 0 ? "#FF687A" : "#20d3b0"),
-        left: ratio * student.coordinates[0],
-        top: ratio * student.coordinates[1],
-        width: ratio * student.coordinates[2],
-        height: ratio * student.coordinates[3]
+        border: "3px solid " + (student.label == "0" ? "#FF687A" : "#20d3b0"),
+        left: ratio * student.faceRectangle.left,
+        top: ratio * student.faceRectangle.top,
+        width: ratio * student.faceRectangle.width,
+        height: ratio * student.faceRectangle.height
       };
       faceRectangles.push(
         <div style={faceStyle}></div>
       );
+      var i = idArr.indexOf(student.name);
+      if (i >= 0) {
+        var att = parseInt(student.label);
+        idInfoArr[i].attention = att;
+        idInfoArr[i].history.push(att);
+      }
     });
     return (
       <div id="face-rectangles-inner">
@@ -62,9 +74,14 @@ var Stats = React.createClass({
   render: function() {
     var attentiveness = 0;
     studentsArr.map(function(student){
-      attentiveness += student.attention;
+      attentiveness += parseInt(student.label);
     });
-    attentiveness /= studentsArr.length;
+    if (studentsArr.length > 0) {
+      attentiveness /= studentsArr.length;
+    }
+    else {
+      attentiveness = 0;
+    }
     historyData.push(
       {
         time: timeCount,
@@ -103,12 +120,13 @@ var ContentLeft = React.createClass({
 
 var Students = React.createClass({
   render: function() {
-    var studentsElements = studentsArr.map(function(student) {
+    var studentsElements = idInfoArr.map(function(student) {
       var overallAttention = 0;
       student.history.map(function(stat) {
         overallAttention += stat;
       });
       overallAttention /= student.history.length;
+
       var currentStatStyle = {
         marginLeft: "auto",
         marginRight: "2vh",
@@ -154,6 +172,7 @@ var Container = React.createClass({
 
 var renderGraph = function() {
   var data = historyData;
+  // console.log(timeCount);
   var statsElement = document.getElementById('stats-overall').getBoundingClientRect();
   var statsContentElement = document.getElementById('stats-content').getBoundingClientRect();
   var graphWidth = statsContentElement.width - statsElement.width - 150;
@@ -186,15 +205,15 @@ var renderGraph = function() {
     .attr('class', 'y axis')
     .call(yAxis);
   var line = d3.line().x(timeFn).y(attnFn);
-  // g.append('g')
-  //   .append("path")
-  //   .datum(data)
-  //   .attr("fill", "none")
-  //   .attr("stroke", "steelblue")
-  //   .attr("stroke-linejoin", "round")
-  //   .attr("stroke-linecap", "round")
-  //   .attr("stroke-width", 1.5)
-  //   .attr("d", line);
+  g.append('g')
+    .append("path")
+    .datum(data)
+    .attr("fill", "none")
+    .attr("stroke", "steelblue")
+    .attr("stroke-linejoin", "round")
+    .attr("stroke-linecap", "round")
+    .attr("stroke-width", 1.5)
+    .attr("d", line);
 };
 
 var renderPage = function() {
@@ -207,4 +226,4 @@ var renderPage = function() {
 };
 
 renderPage();
-setInterval(renderPage, 1000);
+setInterval(renderPage, 1500);

@@ -4,7 +4,7 @@ var StreamContainer = React.createClass({
   render: function() {
     var now = new Date();
     return (
-      <div id="stream-container" onload="reloadImage()">
+      <div id="stream-container">
         <img id="stream-image" src={imgURL + "?" + now.getTime()} />
         <div id="face-rectangles-container"></div>
       </div>

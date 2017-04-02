@@ -51,7 +51,7 @@ var Stats = React.createClass({
         <div style={{flexGrow: 0}}>10:30 AM - 12:30 AM | Hacking Class</div>
         <div id="stats-content">
           <div id="stats-overall" style={{backgroundColor: attentiveness < 0.5 ? "#ff7f9b" : "#20d3b0"}}>
-            <p style={{fontSize: "350%"}}>{attentiveness * 100}%</p>
+            <p style={{fontSize: "350%", lineHeight: "90%"}}>{Math.floor(attentiveness * 100)}%</p>
             <p>Student</p>
             <p>Attentiveness</p>
           </div>
@@ -78,9 +78,32 @@ var ContentLeft = React.createClass({
 var Students = React.createClass({
   render: function() {
     var studentsElements = studentsArr.map(function(student) {
+      var overallAttention = 0;
+      student.history.map(function(stat) {
+        overallAttention += stat;
+      });
+      overallAttention /= student.history.length;
+      var currentStatStyle = {
+        marginLeft: "auto",
+        marginRight: "2vh",
+        backgroundColor: student.attention == 0 ? "#ff7f9b" : "#20d3b0"
+      };
+      var overallStatStyle = {
+        backgroundColor: overallAttention < 0.5 ? "#ff7f9b" : "#20d3b0"
+      };
       return (
         <div className="student-container">
-
+          <p style={{margin: "0", marginRight: "auto"}}>{student.name}</p>
+          <div className="student-stat" style={currentStatStyle}>
+            <p>Currently</p>
+            {student.attention==0 ? <p>NOT</p> : null}
+            <p>Attentive</p>
+          </div>
+          <div className="student-stat" style={overallStatStyle}>
+            <p>Overall</p>
+            <p style={{fontSize: "200%", lineHeight: "95%"}}>{Math.floor(overallAttention * 100)}%</p>
+            <p>Attentive</p>
+          </div>
         </div>
       );
     });

@@ -77,7 +77,7 @@ body {
 }
 
 #stats {
-  background-color: #f7ce7c;
+  background-color: #fce19f;
   flex: 1 1 40%;
   padding: 1vh;
 
@@ -88,7 +88,7 @@ body {
 
 #stats-content {
   flex-grow: 1;
-  padding: 20px;
+  padding: 2vh;
 
   display: -webkit-flex;
 	display: flex;
@@ -99,7 +99,7 @@ body {
 
 #stats-overall {
   color: white;
-  padding: 20px;
+  padding: 2vh;
   height: auto;
   width: auto;
 
@@ -119,13 +119,41 @@ body {
 
 #students {
   flex: 0 1 600px;
-  height: 90vh;
+  height: 92vh;
   overflow-y: scroll;
 }
 
 .student-container {
   width: auto;
-  background-color: #f7ce7c;
+  background-color: #fce19f;
   height: 20vh;
   margin-bottom: 1vh;
+  padding: 2vh;
+
+  display: -webkit-flex;
+	display: flex;
+	flex-direction: row;
+  justify-content: center;
+  align-content: center;
+}
+
+.student-stat {
+  padding: 2vh;
+  height: 16vh;
+  width: 16vh;
+  color: white;
+  display: -webkit-flex;
+	display: flex;
+	flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
+.student-stat p {
+  margin: 0;
+  text-align: center;
+}
+
+.student-container:last-child {
+  margin-bottom: 0;
 }

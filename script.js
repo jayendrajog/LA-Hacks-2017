@@ -1,10 +1,11 @@
-var imgURL = "assets/stream-example.jpg";
+var imgURL = "https://lahacksimages.blob.core.windows.net/classphotos/myimage0.jpeg";
 
 var StreamContainer = React.createClass({
   render: function() {
+    var now = new Date();
     return (
-      <div id="stream-container">
-        <img id="stream-image" src={imgURL} />
+      <div id="stream-container" onload="reloadImage()">
+        <img id="stream-image" src={imgURL + "?" + now.getTime()} />
         <div id="face-rectangles-container"></div>
       </div>
     );
@@ -13,9 +14,27 @@ var StreamContainer = React.createClass({
 
 var FaceRectangles = React.createClass({
   render: function() {
+
+    $.ajax({
+      url: "https://getfacesinfo.azurewebsites.net/api/HttpTriggerJS1?code=a82NvcCSnCUZuMEkiiZfAA3laFa25zA6wDXizt0FBZtjQxCz2iajBg==",
+      dataType: 'json',
+      type: 'GET',
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
+        "Access-Control-Allow-Headers": "Authorization"
+      },
+      success: function(faceData) {
+        this.setState({data: faceData});
+        console.log(this.state.data);
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error("ajax error");
+      }.bind(this)
+    });
+
     var streamImage = document.getElementById("stream-image");
     var imgOriginalWidth = streamImage.naturalWidth;
-    console.log(imgOriginalWidth);
     var ratio = streamImage.getBoundingClientRect().width / imgOriginalWidth;
     var faceRectangles = [];
     studentsArr.map(function(student){
@@ -167,15 +186,15 @@ var renderGraph = function() {
     .attr('class', 'y axis')
     .call(yAxis);
   var line = d3.line().x(timeFn).y(attnFn);
-  g.append('g')
-    .append("path")
-    .datum(data)
-    .attr("fill", "none")
-    .attr("stroke", "steelblue")
-    .attr("stroke-linejoin", "round")
-    .attr("stroke-linecap", "round")
-    .attr("stroke-width", 1.5)
-    .attr("d", line);
+  // g.append('g')
+  //   .append("path")
+  //   .datum(data)
+  //   .attr("fill", "none")
+  //   .attr("stroke", "steelblue")
+  //   .attr("stroke-linejoin", "round")
+  //   .attr("stroke-linecap", "round")
+  //   .attr("stroke-width", 1.5)
+  //   .attr("d", line);
 };
 
 var renderPage = function() {
@@ -188,4 +207,4 @@ var renderPage = function() {
 };
 
 renderPage();
-setInterval(renderPage, 2000);
+setInterval(renderPage, 1000);

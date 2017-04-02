@@ -1,3 +1,12 @@
+var timeCount = 1;
+
+var historyData = [
+  {
+    time: 0,
+    attention: 1
+  }
+];
+
 var studentsArr = [
   {
     name: "Nina Ling",

@@ -77,7 +77,7 @@ body {
 }
 
 #stats {
-  background-color: #fce19f;
+  background-color: #FFEAD0;
   flex: 1 1 40%;
   padding: 1vh;
 
@@ -125,7 +125,7 @@ body {
 
 .student-container {
   width: auto;
-  background-color: #fce19f;
+  background-color: #FFEAD0;
   height: 20vh;
   margin-bottom: 1vh;
   padding: 2vh;

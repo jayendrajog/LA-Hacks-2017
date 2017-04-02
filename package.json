@@ -1,0 +1,28 @@
+{
+  "name": "la-hacks-2017",
+  "version": "1.0.0",
+  "description": "Fixing education with targeted machine learning",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "fs": "0.0.1-security",
+    "path": "^0.12.7",
+    "project-oxford": "^1.7.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jayendrajog/LA-Hacks-2017.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jayendrajog/LA-Hacks-2017/issues"
+  },
+  "homepage": "https://github.com/jayendrajog/LA-Hacks-2017#readme"
+}

@@ -109,7 +109,7 @@ body {
   align-content: center;
 }
 
-#stats-overall {
+#stats-overall, #stats-overall-history {
   color: white;
   padding: 2vh;
   height: auto;
@@ -122,7 +122,7 @@ body {
   align-content: center;
 }
 
-#stats-overall p {
+#stats-overall p, #stats-overall-history p {
   padding: 0;
   margin: 0;
   text-align: center;

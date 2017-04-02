@@ -73,14 +73,11 @@ var FaceRectangles = React.createClass({
 var Stats = React.createClass({
   render: function() {
     var attentiveness = 0;
-    studentsArr.map(function(student){
-      attentiveness += parseInt(student.label);
-    });
     if (studentsArr.length > 0) {
+      studentsArr.map(function(student){
+        attentiveness += parseInt(student.label);
+      });
       attentiveness /= studentsArr.length;
-    }
-    else {
-      attentiveness = 0;
     }
     historyData.push(
       {
@@ -88,6 +85,13 @@ var Stats = React.createClass({
         attention: attentiveness
       }
     );
+    var attentivenessHistory = 0;
+    if (historyData.length > 0) {
+      historyData.map(function(student){
+        attentivenessHistory += student.attention;
+      });
+      attentivenessHistory /= historyData.length;
+    }
     timeCount++;
     return (
       <div id="stats">
@@ -98,8 +102,14 @@ var Stats = React.createClass({
             <p>Student</p>
             <p>Attentiveness</p>
           </div>
-          <div id="stats-graph">
+          {/* <div id="stats-graph">
 
+          </div> */}
+          <div id="stats-overall-history" style={{backgroundColor: attentivenessHistory < 0.5 ? "#FF687A" : "#20d3b0"}}>
+            <p>Overall</p>
+            <p style={{fontSize: "350%", lineHeight: "90%"}}>{Math.floor(attentivenessHistory * 100)}%</p>
+            <p>Student</p>
+            <p>Attentiveness</p>
           </div>
         </div>
       </div>
@@ -207,7 +217,8 @@ var renderGraph = function() {
   var line = d3.line().x(timeFn).y(attnFn);
   g.append('g')
     .append("path")
-    .datum(data)
+    .data(data)
+    .attr("transform", "translate(0," + graphHeight*0.50 + ")")
     .attr("fill", "none")
     .attr("stroke", "steelblue")
     .attr("stroke-linejoin", "round")
@@ -220,7 +231,7 @@ var renderPage = function() {
   ReactDOM.render(<Container />, document.getElementById('content'), function(){
     setTimeout(function(){
       ReactDOM.render(<FaceRectangles />, document.getElementById('face-rectangles-container'));
-      renderGraph();
+      // renderGraph();
     }, 100);
   });
 };

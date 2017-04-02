@@ -1,0 +1,87 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  font-family: "Open Sans";
+}
+
+#container {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+#navbar {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 6vh;
+  width: 100vw;
+  max-width: 100%;
+  padding: 1vh;
+  background-color: #20d3b0;
+  color: white;
+
+  display: -webkit-flex;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+  position: relative;
+}
+
+#content {
+  height: 92vh;
+  padding: 1vh;
+}
+
+#content-container {
+  display: -webkit-flex;
+	display: flex;
+	flex-direction: row;
+  height: 100%;
+}
+
+#content-left {
+  margin-right: 1vh;
+  flex: 0 1.2 1000px;
+  height: 100%;
+
+  display: -webkit-flex;
+	display: flex;
+	flex-direction: column;
+}
+
+#stream-container {
+  width: 100%;
+  position: relative;
+}
+
+#stream-image {
+  width: 100%;
+  flex: 0 1 60%;
+  z-index: -1;
+}
+
+#face-rectangles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+#face-rectangles-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#stats {
+  background-color: #f7ce7c;
+  flex: 0 0 40%;
+}
+
+#students {
+  flex: 0 1 600px;
+  height: 90vh;
+}
